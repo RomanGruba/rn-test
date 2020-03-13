@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderRadius: 10,
     backgroundColor: "white",
-    height: 200
+    minHeight: 200
   }
 });
 

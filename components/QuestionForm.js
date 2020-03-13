@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Data from "../data/JS";
+import Checkbox from "./Checkbox";
 
 const QuestionForm = props => {
   return (
@@ -8,6 +8,9 @@ const QuestionForm = props => {
       <View style={styles.question}>
         <Text style={styles.questionText}>{props.question}</Text>
         <Text style={styles.questionText}>{props.addToQuestion}</Text>
+        {props.answers.map(answer => (
+          <Checkbox answer={answer} />
+        ))}
       </View>
     </View>
   );

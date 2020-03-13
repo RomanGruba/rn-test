@@ -22,6 +22,7 @@ const QuestionScreen = props => {
           <QuestionForm
             question={itemData.item.question}
             addToQuestion={itemData.item.addToQuestion}
+            answers={itemData.item.answers}
           />
         </Card>
       )}
