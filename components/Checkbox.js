@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   View,
   Text,
@@ -13,13 +12,21 @@ const CheckBoxCustom = props => {
 
   const checkHandler = () => {
     setIsChecked(isChecked => !isChecked);
+    props.checkAnswer(props.answer);
   };
+
+  let bgColor;
+  if (isChecked && props.answered === "correct") {
+    bgColor = "green";
+  } else if (isChecked && props.answered === "wrong") {
+    bgColor = "orange";
+  }
 
   return (
     <TouchableOpacity onPress={checkHandler}>
       <View style={styles.screen}>
         <CheckBox value={isChecked} />
-        <View>
+        <View style={{ backgroundColor: bgColor }}>
           <Text style={styles.answerText}>{props.answer}</Text>
         </View>
       </View>

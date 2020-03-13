@@ -13,20 +13,24 @@ import Card from "../components/Card";
 import QuestionForm from "../components/QuestionForm";
 
 const QuestionScreen = props => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+
+  const nextQuestionHandler = () => {
+    if (currentQuestion + 1 < Data.length) {
+      setCurrentQuestion(currentQuestion => currentQuestion + 1);
+    }
+  };
+
   return (
-    <FlatList
-      data={Data}
-      keyExtractor={item => item.id}
-      renderItem={itemData => (
-        <Card>
-          <QuestionForm
-            question={itemData.item.question}
-            addToQuestion={itemData.item.addToQuestion}
-            answers={itemData.item.answers}
-          />
-        </Card>
-      )}
-    />
+    <Card>
+      <QuestionForm
+        question={Data[currentQuestion].question}
+        addToQuestion={Data[currentQuestion].addToQuestion}
+        answers={Data[currentQuestion].answers}
+        correctAnswer={Data[currentQuestion].correctAnswer}
+        nextQuestion={nextQuestionHandler}
+      />
+    </Card>
   );
 };
 
