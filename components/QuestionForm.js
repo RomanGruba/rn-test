@@ -11,15 +11,25 @@ const QuestionForm = props => {
     setUserAnswer(userAnswer);
   };
 
-  const nextHandler = () => {
+  const checkAnswer = () => {
     if (userAnswer === props.correctAnswer) {
       setAnswered("correct");
-      props.nextQuestion();
-      setAnswered();
     } else {
       setAnswered("wrong");
-      setIsTouchableDisabled(true);
     }
+    setIsTouchableDisabled(true);
+  };
+
+  const nextQuestion = () => {
+    setAnswered();
+    props.nextQuestion();
+    setIsTouchableDisabled(false);
+  };
+
+  const prevQuestion = () => {
+    setAnswered();
+    props.prevQuestion();
+    setIsTouchableDisabled(false);
   };
 
   return (
@@ -37,7 +47,13 @@ const QuestionForm = props => {
           />
         ))}
       </View>
-      <Button title="Next" onPress={nextHandler} />
+      <View style={styles.nextBtn}>
+        <Button title="Check" onPress={checkAnswer} />
+      </View>
+      <View style={styles.nav}>
+        <Button title="Prev" onPress={prevQuestion} />
+        <Button title="Next" onPress={nextQuestion} />
+      </View>
     </View>
   );
 };
@@ -46,6 +62,14 @@ const styles = StyleSheet.create({
   questionText: {
     textAlign: "center",
     marginVertical: 4
+  },
+  nextBtn: {
+    alignItems: "center"
+  },
+  nav: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    margin: 10
   }
 });
 

@@ -21,6 +21,12 @@ const QuestionScreen = props => {
     }
   };
 
+  const prevQuestionHandler = () => {
+    if (currentQuestion - 1 >= 0) {
+      setCurrentQuestion(currentQuestion => currentQuestion - 1);
+    }
+  };
+
   return (
     <Card>
       <QuestionForm
@@ -29,6 +35,7 @@ const QuestionScreen = props => {
         answers={Data[currentQuestion].answers}
         correctAnswer={Data[currentQuestion].correctAnswer}
         nextQuestion={nextQuestionHandler}
+        prevQuestion={prevQuestionHandler}
       />
     </Card>
   );
