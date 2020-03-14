@@ -17,18 +17,18 @@ const CheckBoxCustom = props => {
     props.checkAnswer(props.answer);
   };
 
-  let bgColor;
+  let coloredAnswer;
   if (isChecked && props.answered === "correct") {
-    bgColor = "green";
+    coloredAnswer = "green";
   } else if (isChecked && props.answered === "wrong") {
-    bgColor = "orange";
+    coloredAnswer = "orange";
   }
 
   return (
-    <TouchableOpacity onPress={checkHandler}>
+    <TouchableOpacity onPress={checkHandler} disabled={props.touchableDisabled}>
       <View style={styles.screen}>
         <RadioButton selected={isChecked} />
-        <View style={{ backgroundColor: bgColor }}>
+        <View>
           <Text style={styles.answerText}>{props.answer}</Text>
         </View>
       </View>

@@ -5,6 +5,7 @@ import Checkbox from "./Checkbox";
 const QuestionForm = props => {
   const [userAnswer, setUserAnswer] = useState();
   const [answered, setAnswered] = useState();
+  const [isTouchableDisabled, setIsTouchableDisabled] = useState(false);
 
   const checkAnswerHandler = userAnswer => {
     setUserAnswer(userAnswer);
@@ -15,7 +16,10 @@ const QuestionForm = props => {
       setAnswered("correct");
       props.nextQuestion();
       setAnswered();
-    } else setAnswered("wrong");
+    } else {
+      setAnswered("wrong");
+      setIsTouchableDisabled(true);
+    }
   };
 
   return (
@@ -29,6 +33,7 @@ const QuestionForm = props => {
             answer={answer}
             checkAnswer={checkAnswerHandler}
             answered={answered}
+            touchableDisabled={isTouchableDisabled}
           />
         ))}
       </View>
