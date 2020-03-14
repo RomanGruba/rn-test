@@ -6,6 +6,8 @@ import {
   CheckBox,
   TouchableOpacity
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import RadioButton from "./RadioButton";
 
 const CheckBoxCustom = props => {
   const [isChecked, setIsChecked] = useState(false);
@@ -25,7 +27,7 @@ const CheckBoxCustom = props => {
   return (
     <TouchableOpacity onPress={checkHandler}>
       <View style={styles.screen}>
-        <CheckBox value={isChecked} />
+        <RadioButton selected={isChecked} />
         <View style={{ backgroundColor: bgColor }}>
           <Text style={styles.answerText}>{props.answer}</Text>
         </View>
