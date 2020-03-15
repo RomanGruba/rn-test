@@ -1,33 +1,34 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "./Checkbox";
+import * as questionActions from "../store/questionActions";
 
 const QuestionForm = props => {
   const [userAnswer, setUserAnswer] = useState();
-  const [answered, setAnswered] = useState();
+  const [answered, setAnswered] = useState(false);
   const [isTouchableDisabled, setIsTouchableDisabled] = useState(false);
+
+  const dispatch = useDispatch();
 
   const checkAnswerHandler = userAnswer => {
     setUserAnswer(userAnswer);
   };
 
   const checkAnswer = () => {
-    if (userAnswer === props.correctAnswer) {
-      setAnswered("correct");
-    } else {
-      setAnswered("wrong");
-    }
+    dispatch(questionActions.setUserAnswer(userAnswer));
+    setAnswered(true);
     setIsTouchableDisabled(true);
   };
 
   const nextQuestion = () => {
-    setAnswered();
+    setAnswered(false);
     props.nextQuestion();
     setIsTouchableDisabled(false);
   };
 
   const prevQuestion = () => {
-    setAnswered();
+    setAnswered(false);
     props.prevQuestion();
     setIsTouchableDisabled(false);
   };

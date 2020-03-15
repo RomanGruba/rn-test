@@ -1,27 +1,32 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 import RadioButton from "./RadioButton";
 
 const CheckBoxCustom = props => {
   const [isChecked, setIsChecked] = useState(false);
+  const correctAnswer = useSelector(state => state.userAnswer.correctAnswer);
 
-  let coloredAnswer;
   const checkHandler = () => {
-    coloredAnswer = "";
     setIsChecked(isChecked => !isChecked);
     props.checkAnswer(props.answer);
   };
 
-  if (isChecked && props.answered === "correct") {
-    coloredAnswer = "lightgreen";
-  } else if (isChecked && props.answered === "wrong") {
-    coloredAnswer = "orange";
+  let bgColor;
+  if (props.answered) {
+    console.log(correctAnswer);
+
+    if (isChecked && props.answer === correctAnswer) {
+      bgColor = "lightgreen";
+    } else if (isChecked) {
+      bgColor = "orange";
+    }
   }
 
   return (
     <TouchableOpacity onPress={checkHandler} disabled={props.touchableDisabled}>
-      <View style={{ ...styles.screen, backgroundColor: coloredAnswer }}>
+      <View style={{ ...styles.screen, backgroundColor: bgColor }}>
         <RadioButton selected={isChecked} />
         <View>
           <Text style={styles.answerText}>{props.answer}</Text>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import {
   FlatList,
   StyleSheet,
@@ -11,19 +12,31 @@ import {
 import Data from "../data/JS";
 import Card from "../components/Card";
 import QuestionForm from "../components/QuestionForm";
+import * as questionActions from "../store/questionActions";
 
 const QuestionScreen = props => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const dispatch = useDispatch();
 
   const nextQuestionHandler = () => {
     if (currentQuestion + 1 < Data.length) {
       setCurrentQuestion(currentQuestion => currentQuestion + 1);
+      dispatch(
+        questionActions.setCorrectAnswer(
+          Data[currentQuestion + 1].correctAnswer
+        )
+      );
     }
   };
 
   const prevQuestionHandler = () => {
     if (currentQuestion - 1 >= 0) {
       setCurrentQuestion(currentQuestion => currentQuestion - 1);
+      dispatch(
+        questionActions.setCorrectAnswer(
+          Data[currentQuestion - 1].correctAnswer
+        )
+      );
     }
   };
 
