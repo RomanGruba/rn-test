@@ -13,7 +13,6 @@ export default (state = initialState, action) => {
         userAnswer: action.answer
       };
     case SET_CORRECTANSWER:
-      console.log(action.correctAnswer);
       return {
         ...state,
         correctAnswer: action.correctAnswer
