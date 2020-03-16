@@ -1,5 +1,6 @@
 import Question from "../model/Question";
 
+export const SET_QUESTIONS = "SET_QUESTIONS";
 export const SET_USERANSWER = "SET_USERANSWER";
 export const SET_CORRECTANSWER = "SET_CORRECTANSWER";
 
@@ -23,11 +24,12 @@ export const fetchQuestions = () => {
             resData[key].question,
             resData[key].addToQuestion,
             resData[key].answers,
+            resData[key].correctAnswer,
             resData[key].theory
           )
         );
       }
-      console.log(loadedData);
+      dispatch({ type: SET_QUESTIONS, questions: loadedData });
     } catch (err) {
       throw new Error(err);
     }

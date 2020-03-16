@@ -37,7 +37,9 @@ const QuestionForm = props => {
     <View style={styles.screen}>
       <View style={styles.question}>
         <Text style={styles.questionText}>{props.question}</Text>
-        <Text style={styles.questionText}>{props.addToQuestion}</Text>
+        {props.addToQuestion !== "null" ? (
+          <Text style={styles.questionText}>{props.addToQuestion}</Text>
+        ) : null}
         {props.answers.map(answer => (
           <Checkbox
             key={answer}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FlatList,
   StyleSheet,
@@ -16,18 +16,20 @@ import * as questionActions from "../store/questionActions";
 
 const QuestionScreen = props => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const loadedQuestions = useSelector(state => state.questions.questions);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(questionActions.fetchQuestions());
-  });
+  }, [dispatch]);
 
+  // console.log(loadedQuestions);
   const nextQuestionHandler = () => {
-    if (currentQuestion + 1 < Data.length) {
+    if (currentQuestion + 1 < loadedQuestions.length) {
       setCurrentQuestion(currentQuestion => currentQuestion + 1);
       dispatch(
         questionActions.setCorrectAnswer(
-          Data[currentQuestion + 1].correctAnswer
+          loadedQuestions[currentQuestion + 1].correctAnswer
         )
       );
     }
@@ -38,19 +40,25 @@ const QuestionScreen = props => {
       setCurrentQuestion(currentQuestion => currentQuestion - 1);
       dispatch(
         questionActions.setCorrectAnswer(
-          Data[currentQuestion - 1].correctAnswer
+          loadedQuestions[currentQuestion - 1].correctAnswer
         )
       );
     }
   };
 
+  console.log(loadedQuestions[0]);
+
+  if (loadedQuestions.length === 0) {
+    return <ActivityIndicator />;
+  }
+
   return (
     <Card>
       <QuestionForm
-        question={Data[currentQuestion].question}
-        addToQuestion={Data[currentQuestion].addToQuestion}
-        answers={Data[currentQuestion].answers}
-        correctAnswer={Data[currentQuestion].correctAnswer}
+        question={loadedQuestions[currentQuestion].question}
+        addToQuestion={loadedQuestions[currentQuestion].addToQuestion}
+        answers={loadedQuestions[currentQuestion].answers}
+        correctAnswer={loadedQuestions[currentQuestion].correctAnswer}
         nextQuestion={nextQuestionHandler}
         prevQuestion={prevQuestionHandler}
       />

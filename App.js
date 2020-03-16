@@ -6,7 +6,7 @@ import Navigator from "./navigation/Navigator";
 import questionReducer from "./store/questionReducers";
 
 const rootReducer = combineReducers({
-  userAnswer: questionReducer
+  questions: questionReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

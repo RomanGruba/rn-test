@@ -6,7 +6,7 @@ import RadioButton from "./RadioButton";
 
 const CheckBoxCustom = props => {
   const [isChecked, setIsChecked] = useState(false);
-  const correctAnswer = useSelector(state => state.userAnswer.correctAnswer);
+  const correctAnswer = useSelector(state => state.questions.correctAnswer);
 
   const checkHandler = () => {
     setIsChecked(isChecked => !isChecked);
