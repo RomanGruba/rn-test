@@ -18,6 +18,10 @@ const QuestionScreen = props => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(questionActions.fetchQuestions());
+  });
+
   const nextQuestionHandler = () => {
     if (currentQuestion + 1 < Data.length) {
       setCurrentQuestion(currentQuestion => currentQuestion + 1);
