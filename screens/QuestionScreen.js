@@ -46,7 +46,7 @@ const QuestionScreen = props => {
     }
   };
 
-  console.log(loadedQuestions[0]);
+  //console.log(loadedQuestions[0]);
 
   if (loadedQuestions.length === 0) {
     return <ActivityIndicator />;

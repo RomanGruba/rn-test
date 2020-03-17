@@ -33,6 +33,8 @@ const QuestionForm = props => {
     setIsTouchableDisabled(false);
   };
 
+  const filledAnswers = props.answers.filter(answer => answer !== "");
+
   return (
     <View style={styles.screen}>
       <View style={styles.question}>
@@ -40,7 +42,7 @@ const QuestionForm = props => {
         {props.addToQuestion !== "null" ? (
           <Text style={styles.questionText}>{props.addToQuestion}</Text>
         ) : null}
-        {props.answers.map(answer => (
+        {filledAnswers.map(answer => (
           <Checkbox
             key={answer}
             answer={answer}
@@ -73,6 +75,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     margin: 10
+  },
+  question: {
+    marginHorizontal: 10
   }
 });
 
